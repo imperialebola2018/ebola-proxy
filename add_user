@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -e
+
+HTPASSWD=/etc/ebola2018/proxy/htpasswd
+if [ ! -f "$HTPASSWD" ]; then
+    echo "proxy not yet configured"
+    exit 1
+fi
+
+if [ "$#" -ne 2 ]; then
+    echo "Expected two parameters"
+    exit 1
+fi
+
+HT_USER=$1
+HT_PASS=$2
+htpasswd -b "$HTPASSWD" "$HT_USER" "$HT_PASS"
