@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 set -e
 if [ -z "$SSL_CERTIFICATE" ]; then
-    echo 'Did not find user at $SSL_CERTIFICATE variable'
+    echo 'Did not find $SSL_CERTIFICATE variable'
     exit 1
 fi
 
 if [ -z "$SSL_PRIVATE_KEY" ]; then
-    echo 'Did not find password at $SSL_PRIVATE_KEY variable'
+    echo 'Did not find $SSL_PRIVATE_KEY variable'
     exit 1
 fi
 
