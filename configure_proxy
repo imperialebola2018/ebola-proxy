@@ -1,20 +1,21 @@
 #!/usr/bin/env bash
-if [ -z $SSL_CERTIFICATE ]; then
+set -e
+if [ -z "$SSL_CERTIFICATE" ]; then
     echo 'Did not find user at $SSL_CERTIFICATE variable'
     exit 1
 fi
 
-if [ -z $SSL_PRIVATE_KEY ]; then
+if [ -z "$SSL_PRIVATE_KEY" ]; then
     echo 'Did not find password at $SSL_PRIVATE_KEY variable'
     exit 1
 fi
 
-if [ -z $HT_USER ]; then
+if [ -z "$HT_USER" ]; then
     echo 'Did not find user at $HT_USER variable'
     exit 1
 fi
 
-if [ -z $HT_PASS ]; then
+if [ -z "$HT_PASS" ]; then
     echo 'Did not find password at $HT_PASS variable'
     exit 1
 fi
@@ -22,6 +23,9 @@ fi
 DEST=/etc/ebola2018/proxy
 mkdir -p $DEST
 
+echo "Setting up htpassword"
 htpasswd -bc "$DEST/htpasswd" "$HT_USER" "$HT_PASS"
+
+echo "Setting up certificates"
 echo "$SSL_CERTIFICATE" > "$DEST/certificate.pem"
 echo "$SSL_PRIVATE_KEY" > "$DEST/ssl_key.pem"
